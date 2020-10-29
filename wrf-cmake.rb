@@ -12,7 +12,7 @@ class WrfCmake < Formula
   head "https://github.com/WRF-CMake/WRF.git", :branch => "wrf-cmake"
 
   depends_on "cmake" => :build
-  depends_on "gcc" # for gfortran
+  depends_on "gcc@9" # for gfortran
   depends_on "jasper"
   depends_on "libpng"
   depends_on "netcdf"
@@ -28,7 +28,7 @@ class WrfCmake < Formula
     (buildpath/"WPS").install resource("WPS")
 
     # Prevent CMake from finding & using ifort
-    ENV["FC"] = Formula["gcc"].opt_bin/"gfortran"
+    ENV["FC"] = Formula["gcc@9"].opt_bin/"gfortran-9"
 
     wrf_args = *std_cmake_args + %W[
       -DCMAKE_INSTALL_PREFIX=#{prefix}/wrf
